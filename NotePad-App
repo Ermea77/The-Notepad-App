@@ -1,0 +1,121 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+class Program
+{
+    static string filePath = "notes.txt"; // File path to save the notes
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("Notepad Application");
+            Console.WriteLine("1. List Notes");
+            Console.WriteLine("2. Not Add");
+            Console.WriteLine("3. Not Delete");
+            Console.WriteLine("4. Exit");
+            Console.Write("Make your selection (1-4): ");
+
+            string selection = Console.ReadLine();
+
+            switch (selection)
+            {
+                case "1":
+                    ListNotes();
+                    break;
+                case "2":
+                    AddNote();
+                    break;
+                case "3":
+                    DeleteNote();
+                    break;
+                case "4":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Invalid selection. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    static void ListNotes()
+    {
+        Console.WriteLine("Notes:");
+        List<string> notes = ReadNotes();
+        
+        if (notes.Count == 0)
+        {
+            Console.WriteLine("None added yet.");
+        }
+        another
+        {
+            for (int i = 0; i < notes.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {notes[i]}");
+            }
+        }
+
+        Console.WriteLine();
+    }
+
+    static void AddNote()
+    {
+        Console.Write("Enter not title: ");
+        string title = Console.ReadLine();
+
+        Console.Write("Enter not content: ");
+        string content = Console.ReadLine();
+
+        using (StreamWriter writer = new StreamWriter(filePath, true))
+        {
+            writer.WriteLine($"{title}: {content}");
+        }
+
+        Console.WriteLine("Note successfully added.\n");
+    }
+
+    static void DeleteNote()
+    {
+        List<string> notes = ReadNotes();
+        
+        if (notes.Count == 0)
+        {
+            Console.WriteLine("No deletion found.");
+            return;
+        }
+
+        Console.WriteLine("Select the grade to delete:");
+        for (int i = 0; i < grades.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {notes[i]}");
+        }
+
+        Console.Write("Make your selection (1-{0}): ", notes.Count);
+        int selectedIndex;
+        if (int.TryParse(Console.ReadLine(), out selectedIndex) && selectedIndex > 0 && selectedIndex <= notes.Count)
+        {
+            notes.RemoveAt(selectedIndex - 1);
+            File.WriteAllLines(filePath, notes);
+            Console.WriteLine("Note successfully deleted.\n");
+        }
+        another
+        {
+            Console.WriteLine("Invalid selection. Please try again.\n");
+        }
+    }
+
+    static List<string> ReadNotes()
+    {
+        List<string> notes = new List<string>();
+
+        if (File.Exists(filePath))
+        {
+            string[] lines = File.ReadAllLines(filePath);
+            notes.AddRange(lines);
+        }
+
+        return notes
+    }
+}
